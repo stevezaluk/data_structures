@@ -18,6 +18,7 @@ struct Node {
 struct Node *init_node(int data) {
     struct Node *node = malloc(sizeof(struct Node));
     node->data = data;
+    
     node->head = NULL;
     node->next = NULL;
     return node;
@@ -25,6 +26,7 @@ struct Node *init_node(int data) {
 
 int get_length(struct Node *node) {
     int i = 1;
+    node = node->head;
     while(node->next != NULL) {
         i++;
         node = node->next;
@@ -33,6 +35,7 @@ int get_length(struct Node *node) {
 }
 
 struct Node *get_node(struct Node *node, int location) {
+    node = node->head;
     if(location == 1) {
         return node;
     } else {
@@ -51,7 +54,8 @@ struct Node *get_node(struct Node *node, int location) {
 void append_node(struct Node *node, struct Node *append) {
     int length = get_length(node);
     int i = 1;
-    while(!node->next) {
+    node = node->head;
+    while(node->next != NULL) {
         i++;
         node = node->next;
         if(length == i) {
@@ -60,12 +64,8 @@ void append_node(struct Node *node, struct Node *append) {
     }
 }
 
-
-/* 
-    This will generate length number of nodes with simple integer values as data
-*/
-
 void iter_nodes(struct Node *node) {
+    node = node->head;
     printf("Start Node: %d\n", node->data);
     while(node->next != NULL) {
         node = node->next;
