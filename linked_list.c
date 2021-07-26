@@ -38,6 +38,8 @@ struct Node *get_node(struct Node *node, int location) {
     node = node->head;
     if(location == 1) {
         return node;
+    } else if(location == -1) {
+        
     } else {
         int i = 1;
         while(node->next != NULL) {
@@ -96,6 +98,7 @@ int main() {
     int length = get_length(first);
     printf("Length of list: %d\n", length);
 
+    printf("Adding fourth node\n");
     struct Node *fourth = init_node(400);
     third->next = fourth;
     third->head = first;
@@ -105,7 +108,7 @@ int main() {
     int new_length = get_length(first);
     printf("Length of list: %d\n", new_length);
 
-    printf("Appending a fifth node to the end of the linked list");
+    printf("Appending a fifth node to the end of the linked list\n");
     struct Node *fifth = init_node(500);
     fifth->head = first;
     
