@@ -4,9 +4,10 @@
 /*
     get length of linked list   @
     append node to linked list      @
-    insert node in linked list
     ret a node at a specific location   @
+    insert node in linked list
     generate nodes
+    merge linked lists
 */
 
 struct Node {
@@ -27,19 +28,29 @@ struct Node *init_node(int data) {
 int get_length(struct Node *node) {
     int i = 1;
     node = node->head;
+    
+    if(node == NULL) {
+        printf("Could not find the head of the linked list ie node->head is NULL");
+        exit(0);
+    }
+    
     while(node->next != NULL) {
         i++;
         node = node->next;
     }
+    
     return i;
 }
 
 struct Node *get_node(struct Node *node, int location) {
     node = node->head;
+    if(node == NULL) {
+        printf("Could not find the head of the linked list ie node->head is NULL");
+        exit(0);
+    }
+
     if(location == 1) {
         return node;
-    } else if(location == -1) {
-        
     } else {
         int i = 1;
         while(node->next != NULL) {
@@ -50,6 +61,7 @@ struct Node *get_node(struct Node *node, int location) {
             }
         }
     }
+    
     return NULL;
 }
 
@@ -57,6 +69,10 @@ void append_node(struct Node *node, struct Node *append) {
     int length = get_length(node);
     int i = 1;
     node = node->head;
+    if(node == NULL) {
+        printf("Could not find the head of the linked list ie node->head is NULL");
+        exit(0);
+    }
     while(node->next != NULL) {
         i++;
         node = node->next;
@@ -68,17 +84,20 @@ void append_node(struct Node *node, struct Node *append) {
 
 void iter_nodes(struct Node *node) {
     node = node->head;
-    printf("Start Node: %d\n", node->data);
+    if(node == NULL) {
+        printf("Could not find the head of the linked list ie node->head is NULL");
+        exit(0);
+    }
     while(node->next != NULL) {
+        printf("Node: %d\n", node->data);
         node = node->next;
-        printf("Next Node: %d\n", node->data);
     }
 }
 
 int main() {
     struct Node *first = init_node(100);
     struct Node *second = init_node(200);
-    struct Node *third = init_node(300);
+    struct Node *third = init_node(300); 
 
     first->next = second;
     first->head = first;
@@ -115,6 +134,9 @@ int main() {
     append_node(first, fifth);
 
     iter_nodes(first);
+
+    struct Node *last = get_node(first, get_length(first));
+    printf("Getting last node: %d", last->data);
 
     free(first);
     free(second);
