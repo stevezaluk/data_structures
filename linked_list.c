@@ -70,7 +70,7 @@ void append_node(struct Node *node, struct Node *append) {
     int i = 1;
     node = node->head;
     if(node == NULL) {
-        printf("Could not find the head of the linked list ie node->head is NULL");
+        printf("Could not find the head of the linked list");
         exit(0);
     }
     while(node->next != NULL) {
@@ -93,6 +93,7 @@ void iter_nodes(struct Node *node) {
         node = node->next;
     }
 }
+
 
 int main() {
     struct Node *first = init_node(100);
